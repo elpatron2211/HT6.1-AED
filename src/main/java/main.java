@@ -53,12 +53,82 @@ public class main {
                         }
                     }
                     Set<Map.Entry<String,String>> st = hash.entrySet();  //returns Set view
-                    for(Map.Entry<String,String> me:st){
+                    /*for(Map.Entry<String,String> me:st){
                         System.out.print(me.getKey()+":");
                         System.out.println(me.getValue());
-                    }
+                    }*/
                     
+                    int Menú=MenuPrincipal();
                         
+                    System.out.println("Mi opcion "+Menú);
+
+                    if(Menú==1){
+
+                    }else if(Menú==2){
+
+                        System.out.println("\nEscriba el nombre de la carta que desea buscar:");
+                        String carta=scan.nextLine();
+                        for(Map.Entry<String,String> me:st){
+
+                            if(me.getKey().equals(carta)){
+
+                                System.out.println("Su tipo es de: "+me.getValue());
+
+                            }
+
+                            
+                        }
+
+                    }else if(Menú==3){
+
+                    }else if(Menú==4){
+
+                    }else if(Menú==5){
+
+                        for(Map.Entry<String,String> me:st){
+                            System.out.print(me.getKey()+":");
+                            System.out.println(me.getValue());
+                        }
+
+                    }else if(Menú==6){
+
+                        for(Map.Entry<String,String> me:st){
+
+                            if(me.getValue().equals("Monstruo")){
+
+                                System.out.print(me.getKey()+":");
+                                System.out.println(me.getValue());
+
+                            }
+
+                            
+                        }
+                        System.out.print("\n");
+                        for(Map.Entry<String,String> me:st){
+
+                            if(me.getValue().equals("Hechizo")){
+
+                                System.out.print(me.getKey()+":");
+                                System.out.println(me.getValue());
+
+                            }
+
+                            
+                        }
+                        System.out.print("\n");
+                        for(Map.Entry<String,String> me:st){
+
+                            if(me.getValue().equals("Trampa")){
+
+                                System.out.print(me.getKey()+":");
+                                System.out.println(me.getValue());
+
+                            }
+
+                            
+                        }
+
+                    }
 
                     terminar1=true;
                 }else if(op==2){
@@ -176,4 +246,27 @@ public class main {
         }
     }
 
+    public static int MenuPrincipal(){
+        boolean terminar2=false;
+        int y=0;;
+        do{
+            try {
+                System.out.println("\nQué desea hacer?\n1.Agregar una carta a la colección del usuario\n2.Mostrar el tipo de una carta específica\n3.Mostrar el nombre, tipo y cantidad de cada carta que el usuario tiene en su colección\n4.Mostrar el nombre, tipo y cantidad de cada carta que el usuario tiene en su colección, ordenadas por tipo\n5.Mostrar el nombre y tipo de todas las cartas existentes\n6.Mostrar el nombre y tipo de todas las cartas existentes, ordenadas por tipo\n7.Salir");
+                String x=scan.nextLine();
+                y=Integer.parseInt(x);
+                if(y<8&&y>0){
+                    terminar2=true;
+                }else{
+                    System.out.println("\nOpción incorrecta vuelva a intentarlo");
+                }
+            } catch (Exception e) {
+                //TODO: handle exception
+                System.out.println("\nOpción incorrecta vuelva a intentarlo");
+            }
+
+
+        }while(terminar2==false);
+        
+        return y;
+    }
 }
