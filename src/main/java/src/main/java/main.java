@@ -1,9 +1,15 @@
 package src.main.java;
-
+/**
+ * Main
+ * Objetivo: Intermediar funciones 
+ * 
+ * @author Walter Cruz 
+ * @author Paulo Sanchez
+ * @version 1.0 finalizado 17/03/2022
+ */
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
