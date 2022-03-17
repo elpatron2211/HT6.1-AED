@@ -64,77 +64,213 @@ public class main {
                         System.out.println(me.getValue());
                     }*/
                     
-                    int Menú=MenuPrincipal();
+                    boolean terminar2=false;
+                    ArrayList<ArrayList> Colección=new ArrayList<>();
+
+                    do{
+                        int Menú=MenuPrincipal();
                         
-                    System.out.println("Mi opcion "+Menú);
+                        System.out.println("Mi opcion "+Menú);
 
-                    if(Menú==1){
+                        if(Menú==1){
+                            System.out.println("\nIngrese el nombre de la carta que desea agregar a su colección: ");
 
-                    }else if(Menú==2){
+                            String carta=scan.nextLine();
 
-                        System.out.println("\nEscriba el nombre de la carta que desea buscar:");
-                        String carta=scan.nextLine();
-                        for(Map.Entry<String,String> me:st){
+                            boolean encontrado=false;
 
-                            if(me.getKey().equals(carta)){
-
-                                System.out.println("Su tipo es de: "+me.getValue());
-
+                            for(Map.Entry<String,String> me:st){
+    
+                                if(me.getKey().equals(carta)){
+    
+                                    encontrado=true;
+    
+                                }
+    
+                                
                             }
 
+
+
+
+                            if(encontrado==true){
+
+
+                                if(Colección.isEmpty()==true){
+                                    ArrayList<String> CartasUsuarios=new ArrayList<>();
+                                    CartasUsuarios.add(carta);
+                                    for(Map.Entry<String,String> me:st){
+    
+                                        if(me.getKey().equals(carta)){
+            
+                                            CartasUsuarios.add(me.getValue());
+            
+                                        }
+                                        
+                                        
+                                    }
+                                    CartasUsuarios.add("1");
+                                    Colección.add(CartasUsuarios);
+
+                                    for(int i=0;i<Colección.size();i++){
+                                        if(Colección.get(i).get(0).equals(carta)){
+                                            
+                                            System.out.println("\nAgregado con éxito:\nSu carta es la "+carta+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                        }
+                                    }
+                                }else{
+                                    encontrado=false;
+                                    for(int i=0;i<Colección.size();i++){
+                                        if(Colección.get(i).get(0).equals(carta)){
+                                            int cantidad=Integer.parseInt((String) Colección.get(i).get(2))+1;
+                                            Colección.get(i).set(2,cantidad+"");
+                                            encontrado=true;
+                                            System.out.println("\nAgregado con éxito:\nSu carta es la "+carta+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                        }
+                                    }
+                                    if(encontrado==false){
+
+                                        ArrayList<String> CartasUsuarios=new ArrayList<>();
+                                        CartasUsuarios.add(carta);
+                                        for(Map.Entry<String,String> me:st){
+        
+                                            if(me.getKey().equals(carta)){
+                
+                                                CartasUsuarios.add(me.getValue());
+                
+                                            }
+                                            
+                                            
+                                        }
+                                        CartasUsuarios.add("1");
+                                        Colección.add(CartasUsuarios);
+                                        encontrado=true;
+
+                                        for(int i=0;i<Colección.size();i++){
+                                            if(Colección.get(i).get(0).equals(carta)){
+                                                
+                                                System.out.println("\nAgregado con éxito:\nSu carta es la "+carta+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                            }
+                                        }
+
+                                        
+
+                                    }
+
+
+                                }
+                                
+                            }else{
+                                System.out.println("Carta no reconocida");
+                            }
+
+
+                        }else if(Menú==2){
+    
+                            System.out.println("\nEscriba el nombre de la carta que desea buscar:");
+                            String carta=scan.nextLine();
+                            for(Map.Entry<String,String> me:st){
+    
+                                if(me.getKey().equals(carta)){
+    
+                                    System.out.println("Su tipo es de: "+me.getValue());
+    
+                                }
+    
+                                
+                            }
+    
+                        }else if(Menú==3){
                             
-                        }
+                            for(int i=0;i<Colección.size();i++){
+                                
+                                    
+                                System.out.println("\n\nCarta "+Colección.get(i).get(0)+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                
+                            }
 
-                    }else if(Menú==3){
 
-                    }else if(Menú==4){
+                        }else if(Menú==4){
 
-                    }else if(Menú==5){
-
-                        for(Map.Entry<String,String> me:st){
-                            System.out.print(me.getKey()+":");
-                            System.out.println(me.getValue());
-                        }
-
-                    }else if(Menú==6){
-
-                        for(Map.Entry<String,String> me:st){
-
-                            if(me.getValue().equals("Monstruo")){
-
+                            for(int i=0;i<Colección.size();i++){
+                                
+                                if(Colección.get(i).get(1).equals("Monstruo")){
+                                    System.out.println("\n\nCarta "+Colección.get(i).get(0)+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                }
+                                                
+                                
+                                
+                            }
+                            for(int i=0;i<Colección.size();i++){
+                                
+                                if(Colección.get(i).get(1).equals("Hechizo")){
+                                    System.out.println("\n\nCarta "+Colección.get(i).get(0)+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                }
+                                                
+                                
+                                
+                            }
+                            for(int i=0;i<Colección.size();i++){
+                                
+                                if(Colección.get(i).get(1).equals("Trampa")){
+                                    System.out.println("\n\nCarta "+Colección.get(i).get(0)+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
+                                }
+                                                
+                                
+                                
+                            }
+    
+                        }else if(Menú==5){
+    
+                            for(Map.Entry<String,String> me:st){
                                 System.out.print(me.getKey()+":");
                                 System.out.println(me.getValue());
-
                             }
-
-                            
-                        }
-                        System.out.print("\n");
-                        for(Map.Entry<String,String> me:st){
-
-                            if(me.getValue().equals("Hechizo")){
-
-                                System.out.print(me.getKey()+":");
-                                System.out.println(me.getValue());
-
+    
+                        }else if(Menú==6){
+    
+                            for(Map.Entry<String,String> me:st){
+    
+                                if(me.getValue().equals("Monstruo")){
+    
+                                    System.out.print(me.getKey()+":");
+                                    System.out.println(me.getValue());
+    
+                                }
+    
+                                
                             }
-
-                            
-                        }
-                        System.out.print("\n");
-                        for(Map.Entry<String,String> me:st){
-
-                            if(me.getValue().equals("Trampa")){
-
-                                System.out.print(me.getKey()+":");
-                                System.out.println(me.getValue());
-
+                            System.out.print("\n");
+                            for(Map.Entry<String,String> me:st){
+    
+                                if(me.getValue().equals("Hechizo")){
+    
+                                    System.out.print(me.getKey()+":");
+                                    System.out.println(me.getValue());
+    
+                                }
+    
+                                
                             }
-
-                            
+                            System.out.print("\n");
+                            for(Map.Entry<String,String> me:st){
+    
+                                if(me.getValue().equals("Trampa")){
+    
+                                    System.out.print(me.getKey()+":");
+                                    System.out.println(me.getValue());
+    
+                                }
+    
+                                
+                            }
+    
+                        }else if(Menú==7){
+                            terminar2=true;
                         }
 
-                    }
+                    }while(terminar2==false);
+                    
 
                     terminar1=true;
                 }else if(op==2){
