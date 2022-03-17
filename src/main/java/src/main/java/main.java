@@ -19,9 +19,10 @@ import java.util.TreeMap;
 
 
 public class main {
-
+    //Cracion de objetos
     public static Scanner scan=new Scanner(System.in);
-
+    static MapFactory<String,String> mFactory= new MapFactory<String,String> ();
+    static Map<String, String> miFac=mFactory.getMap("1");
 
     public static void main(String[] args) {
         ArrayList<String> operations = getOperations();
@@ -36,12 +37,12 @@ public class main {
             try{
                 String Op=scan.nextLine();
                 int op=Integer.parseInt(Op);
-
+                //Opcion de HashMap
                 if(op==1){
-                    HashMap< String,String> hash = new HashMap< String,String>();
+                    miFac=mFactory.getMap("1");
                     String[] split;
-                    
-
+                      
+                //Se agregan del archivo de txt al mapa todas las cartas
                     for (String operation: operations) {
                         if (!operation.trim().isEmpty()) { // Verifica que la línea del txt no venga vacía
 
@@ -51,54 +52,56 @@ public class main {
                                 split=cartas.split("\\|");
                                 String split0=split[0];
                                 String split1=split[1];
-                                hash.put(split0,split1);
+                                miFac.put(split0,split1);
                                 //System.out.println(split0+": "+split1);
                             } catch (Exception e) {
                                 System.out.println("Operación: " + operation + "\t Operación inválida." + "\t ERROR: " + e.getMessage());
                             }
                         }
                     }
-                    Set<Map.Entry<String,String>> st = hash.entrySet();  //returns Set view
-                    /*for(Map.Entry<String,String> me:st){
-                        System.out.print(me.getKey()+":");
-                        System.out.println(me.getValue());
-                    }*/
+
+                    //Creación de variable para imprimir los valores y llaves del mapa
+                    Set<Map.Entry<String,String>> st = miFac.entrySet();  //returns Set view
                     
+                    //Se crea una variable para un ciclo del menú con opciones para las cartas 
+                    //Y se crea una colección para que el usuario pueda guardar sus cartas
                     boolean terminar2=false;
                     ArrayList<ArrayList> Colección=new ArrayList<>();
 
                     do{
+                        //Se imprime el menú y se devuelve la opción del usuario
                         int Menú=MenuPrincipal();
                         
                         System.out.println("Mi opcion "+Menú);
 
+                        //Guarda cartas a la colección del usuario
                         if(Menú==1){
                             System.out.println("\nIngrese el nombre de la carta que desea agregar a su colección: ");
 
                             String carta=scan.nextLine();
 
                             boolean encontrado=false;
-
+                            //Revisamos si existe la carta
                             for(Map.Entry<String,String> me:st){
-    
+                                //Encontro la carta
                                 if(me.getKey().equals(carta)){
     
                                     encontrado=true;
     
-                                }
-    
-                                
+                                }   
                             }
 
 
 
-
+                            //Si existe la carta se agrega a la colección del usuario
                             if(encontrado==true){
 
-
+                                //Si el usuario todavía no tiene cartas
                                 if(Colección.isEmpty()==true){
+                                    //Se crea un ArrayList donde la primera posición es el nombre de la carta
                                     ArrayList<String> CartasUsuarios=new ArrayList<>();
                                     CartasUsuarios.add(carta);
+                                    //La segunda posición es el tipo de carta
                                     for(Map.Entry<String,String> me:st){
     
                                         if(me.getKey().equals(carta)){
@@ -109,27 +112,34 @@ public class main {
                                         
                                         
                                     }
+                                    //La tercera posición es la cantidad de la carta
                                     CartasUsuarios.add("1");
+                                    //Se agrega nombre, tipo y cantidad a la colección
                                     Colección.add(CartasUsuarios);
-
+                                    //Se muestra al usuario la carta que acaba de agregar con tipo y cantidad
                                     for(int i=0;i<Colección.size();i++){
                                         if(Colección.get(i).get(0).equals(carta)){
                                             
                                             System.out.println("\nAgregado con éxito:\nSu carta es la "+carta+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
                                         }
                                     }
+                                //Si el usuario ya tiene cartas
                                 }else{
+                                    //Se busca si la carta ya existe en la colección
                                     encontrado=false;
                                     for(int i=0;i<Colección.size();i++){
+                                        //Si existe la carta en la colección
                                         if(Colección.get(i).get(0).equals(carta)){
+                                            //Se suma a la cantidad +1
                                             int cantidad=Integer.parseInt((String) Colección.get(i).get(2))+1;
                                             Colección.get(i).set(2,cantidad+"");
                                             encontrado=true;
                                             System.out.println("\nAgregado con éxito:\nSu carta es la "+carta+"\nSu tipo es el "+Colección.get(i).get(1)+"\nSu cantidad es "+Colección.get(i).get(2));
                                         }
                                     }
+                                    //Si la carta aún no está en la colección
                                     if(encontrado==false){
-
+                                        //Se crra un ArrayList como cuando estaba vacio y se agrega
                                         ArrayList<String> CartasUsuarios=new ArrayList<>();
                                         CartasUsuarios.add(carta);
                                         for(Map.Entry<String,String> me:st){
@@ -145,7 +155,7 @@ public class main {
                                         CartasUsuarios.add("1");
                                         Colección.add(CartasUsuarios);
                                         encontrado=true;
-
+                                        //Se muestra la carta se agrego
                                         for(int i=0;i<Colección.size();i++){
                                             if(Colección.get(i).get(0).equals(carta)){
                                                 
@@ -159,14 +169,14 @@ public class main {
 
 
                                 }
-                                
+                            //No existe la carta entonces no se puede agregar a la colección    
                             }else{
                                 System.out.println("Carta no reconocida");
                             }
 
-
+                        //Muestra el tipo de una carta
                         }else if(Menú==2){
-    
+                            //Escribes el nombre de una carta y te muestra el tipo
                             System.out.println("\nEscriba el nombre de la carta que desea buscar:");
                             String carta=scan.nextLine();
                             for(Map.Entry<String,String> me:st){
@@ -179,7 +189,7 @@ public class main {
     
                                 
                             }
-    
+                        //Muestra todas las cartas del usuario
                         }else if(Menú==3){
                             
                             for(int i=0;i<Colección.size();i++){
@@ -189,9 +199,9 @@ public class main {
                                 
                             }
 
-
+                        //Muestra todas las cartas de la colección del usuario pero clasificadas por tipo
                         }else if(Menú==4){
-
+                            //I,prime 
                             for(int i=0;i<Colección.size();i++){
                                 
                                 if(Colección.get(i).get(1).equals("Monstruo")){
@@ -274,7 +284,7 @@ public class main {
 
                     terminar1=true;
                 }else if(op==2){
-                    TreeMap<String,String> tree = new TreeMap<String,String>();
+                    miFac=mFactory.getMap("2");
 
                     String[] split;
                     
@@ -288,14 +298,14 @@ public class main {
                                 split=cartas.split("\\|");
                                 String split0=split[0];
                                 String split1=split[1];
-                                tree.put(split0,split1);
+                                miFac.put(split0,split1);
                                 //System.out.println(split0+": "+split1);
                             } catch (Exception e) {
                                 System.out.println("Operación: " + operation + "\t Operación inválida." + "\t ERROR: " + e.getMessage());
                             }
                         }
                     }
-                    Set<Map.Entry<String,String>> st = tree.entrySet();  //returns Set view
+                    Set<Map.Entry<String,String>> st = miFac.entrySet();  //returns Set view
                     for(Map.Entry<String,String> me:st){
                         System.out.print(me.getKey()+":");
                         System.out.println(me.getValue());
@@ -304,7 +314,7 @@ public class main {
 
                     terminar1=true;
                 }else if(op==3){
-                    LinkedHashMap<String,String> link = new LinkedHashMap<String,String>();
+                    miFac=mFactory.getMap("3");
 
                     String[] split;
                     
@@ -318,14 +328,14 @@ public class main {
                                 split=cartas.split("\\|");
                                 String split0=split[0];
                                 String split1=split[1];
-                                link.put(split0,split1);
+                                miFac.put(split0,split1);
                                 //System.out.println(split0+": "+split1);
                             } catch (Exception e) {
                                 System.out.println("Operación: " + operation + "\t Operación inválida." + "\t ERROR: " + e.getMessage());
                             }
                         }
                     }
-                    Set<Map.Entry<String,String>> st = link.entrySet();  //returns Set view
+                    Set<Map.Entry<String,String>> st = miFac.entrySet();  //returns Set view
                     for(Map.Entry<String,String> me:st){
                         System.out.print(me.getKey()+":");
                         System.out.println(me.getValue());
